@@ -24,18 +24,30 @@ It demonstrate a usage of ```threex.linkify.js```
 How To Install It
 =================
 
-You can install it via script tag
+#### You can install it via script tag
 
 ```html
 <script src='threex.domevents.js'></script>
 ```
 
-Or you can install with [bower](http://bower.io/), as you wish.
+#### Or you can install with [bower](http://bower.io/).
 
 ```bash
 bower install threex.domevents
 ```
 
+#### Or if you want to use browserify.
+```bash
+npm install threex.domevents
+```
+Than in your code:
+```js
+var DomEvents = require('threex.domevents')(THREE).DomEvents;
+```
+If you already have THREEx object and want to extend it with .DomEvents:
+```js
+require('threex.domevents')(THREE, THREEx);
+```
 How To Use It
 =============
 
