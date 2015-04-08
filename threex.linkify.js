@@ -57,3 +57,19 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 		console.log('not yet implemented')
 	}
 }
+
+if (typeof module === 'object') {
+	var self = this;
+	module.exports = function(THREE, THREEx){
+		self.THREE = THREE;
+
+		THREEx = THREEx || {};
+
+		for(var key in self.THREEx)
+		if(self.THREEx.hasOwnProperty(key)){
+			THREEx[key] = self.THREEx[key];
+		}
+
+		return THREEx;
+	};
+}

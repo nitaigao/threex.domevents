@@ -472,3 +472,19 @@ THREEx.DomEvents.prototype._onTouchEvent	= function(eventName, domEvent)
 	var mouseY	= -(domEvent.touches[ 0 ].pageY / window.innerHeight) * 2 + 1;
 	this._onEvent(eventName, mouseX, mouseY, domEvent);	
 }
+
+if (typeof module === 'object') {
+	var self = this;
+	module.exports = function(THREE, THREEx){
+		self.THREE = THREE;
+
+		THREEx = THREEx || {};
+
+		for(var key in self.THREEx)
+		if(self.THREEx.hasOwnProperty(key)){
+			THREEx[key] = self.THREEx[key];
+		}
+
+		return THREEx;
+	};
+}
