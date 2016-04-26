@@ -16,7 +16,7 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 		var boundingBox	= new THREE.Mesh(new THREE.CubeGeometry(1,1,1), new THREE.MeshBasicMaterial({
 			wireframe	: true
 		}))
-		boundingBox.visible	= false
+		boundingBox.material.visible	= false
 		boundingBox.scale.copy(size)
 		mesh.add(boundingBox)	
 	}
@@ -38,6 +38,10 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 	var eventTarget	= withBoundingBox ? boundingBox : mesh 
 	this.eventTarget= eventTarget
 	domEvents.bind(eventTarget, 'click', function(event){
+		window.open(url, '_blank');
+	})
+	
+	domEvents.bind(eventTarget, 'touchend', function(event){
 		window.open(url, '_blank');
 	})
 
