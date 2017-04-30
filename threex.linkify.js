@@ -1,5 +1,9 @@
 var THREEx	= THREEx	|| {}
 
+if(typeof module === "object" && module.exports) {
+    var THREE = require('three');
+    module.exports = THREEx;
+}
 
 THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 	withBoundingBox	= withBoundingBox !== undefined ? withBoundingBox : true
@@ -10,7 +14,7 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 	size.x	= (geometry.boundingBox.max.x - geometry.boundingBox.min.x)
 	size.y	= (geometry.boundingBox.max.y - geometry.boundingBox.min.y)
 	size.z	= (geometry.boundingBox.max.z - geometry.boundingBox.min.z)
-	
+
 	// create the boundingBox if needed
 	if( withBoundingBox ){
 		var boundingBox	= new THREE.Mesh(new THREE.CubeGeometry(1,1,1), new THREE.MeshBasicMaterial({
@@ -18,7 +22,7 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 		}))
 		boundingBox.visible	= false
 		boundingBox.scale.copy(size)
-		mesh.add(boundingBox)	
+		mesh.add(boundingBox)
 	}
 
 	// build the underline
@@ -35,7 +39,7 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 	mesh.add(underline)
 
 	// bind the click
-	var eventTarget	= withBoundingBox ? boundingBox : mesh 
+	var eventTarget	= withBoundingBox ? boundingBox : mesh
 	this.eventTarget= eventTarget
 	domEvents.bind(eventTarget, 'click', function(event){
 		window.open(url, '_blank');
@@ -46,18 +50,14 @@ THREEx.Linkify	= function(domEvents, mesh, url, withBoundingBox){
 		underline.visible	= true;
 		document.body.style.cursor	= 'pointer';
 	}, false)
-		
+
 	// bind 'mouseout'
 	domEvents.bind(eventTarget, 'mouseout', function(event){
-		underline.visible	= false;		
+		underline.visible	= false;
 		document.body.style.cursor	= 'default';
 	}, false)
-	
+
 	this.destroy	= function(){
 		console.log('not yet implemented')
 	}
-}
-
-if(typeof module === "object" && module.exports) {
-	module.exports = THREEx;
 }
