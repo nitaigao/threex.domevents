@@ -62,10 +62,15 @@
 // 
 // # Code
 
-//
+// Depend on three.js (browserify compatible)
+var THREE = window.THREE;
+try{ THREE = require('three') || window.THREE; }catch(e){}
 
 /** @namespace */
 var THREEx		= THREEx 		|| {};
+
+// Export to enable browserify compatibility
+try{ module.exports = THREEx; }catch(e){}
 
 // # Constructor
 THREEx.DomEvents	= function(camera, domElement)
